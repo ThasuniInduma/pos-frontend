@@ -1,0 +1,68 @@
+
+$secondary: #0633f9;
+
+.form-category{
+    background:#354b85;
+    border: 50px solid #354b85;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    height: 100px;
+}
+.category{
+    color: #fff;
+}
+.category-container{
+    display: flex;
+    margin-left: 10px;
+    margin-top: 20px;
+    max-width: 50px;
+
+    .form-container1 {
+        flex: 1;
+        margin-right: 20px;
+        
+    
+        .form-category {
+          .form-group1 {
+            margin-bottom: 15px;
+            
+    
+            label {
+              display: block;
+              margin-top: -16px;
+              color: #fff;
+              width: 270px;
+              font-size: 20px;
+              
+            }
+            
+    
+            input {
+              width: 270px;
+              padding: 8px;
+              margin-top: -16px;
+              height: 40px;
+              
+            }
+          }
+    
+          button {
+            margin-left: 120px;
+            margin-top: -16px;
+            height: 40px;
+            width: 100px;
+            color: #fff;
+            background: $secondary;
+          }
+        }
+      }
+}
+.form-category,
+.form-group1,
+.button{
+    display: flex;
+}
+
+
+@import '~bootstrap/scss/bootstrap';

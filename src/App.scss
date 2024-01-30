@@ -1,0 +1,115 @@
+
+$primary: #ffff;
+$secondary: #0000;
+$danger: #354b85;
+$dark: #1e3674;
+$color: #0b297e;
+
+
+.App {
+    background-color: $dark;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.Navbar {
+    background-color: $danger;
+    height: 100%;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Sidebar {
+    height: auto;
+    display: flex;
+}
+
+.NavbarList {
+    height: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.row2 {
+    width: 100%;
+    height: 60px;
+    list-style-type: none;
+    margin: 0%;
+    display: flex;
+    color: $primary;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.row2:hover {
+    cursor: pointer;
+    background-color: #103472;
+}
+
+.Navbar #active {
+    background-color: #103472;
+}
+
+.row2 #icon {
+    flex: 10%;
+    display: grid;
+    place-items: center;
+}
+
+.row2 #title {
+    flex: 70%
+}
+
+.row1 {
+    display: flex;
+    align-items: center;
+}
+
+.row1-content {
+    display: flex;
+    align-items: center;
+}
+
+.pos,
+.logo,
+.bars {
+    margin-right: 10px;
+}
+
+.pos {
+    color: $primary;
+    font-size: 40px;
+    margin-left: 15px;
+}
+
+.logo {
+    color: $primary;
+    font-size: 35px;
+    margin-top: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.bars {
+    color: $primary;
+    font-size: 30px;
+    display: flex;
+    margin-left: 55px;
+    margin-top: 15px;
+}
+
+.main {
+    width: 100%;
+}
+
+@import '~bootstrap/scss/bootstrap';

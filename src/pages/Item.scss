@@ -1,0 +1,117 @@
+$secondary: #0633f9;
+
+.form-item {
+    background:#354b85;
+    border: 50px solid #354b85;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.item{
+    color: #fff;
+}
+
+.item-container {
+    display: flex;
+    margin-left: 10px;
+    margin-top: 20px;
+    max-width: 50px;
+  
+    .form-container {
+      flex: 1;
+      margin-right: 20px;
+  
+      h1 {
+        margin-bottom: 20px;
+      }
+  
+      .form-item {
+        .form-group {
+          margin-bottom: 15px;
+  
+          label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+            
+          }
+          
+  
+          input {
+            width: 100%;
+            padding: 8px;
+          }
+        }
+  
+        button {
+          margin-left: 120px;
+          margin-top: 10px;
+        }
+      }
+    }
+  
+    .card2 {
+      flex: 1;
+      margin-top: 68px;
+      background-color: #354b85;
+      min-width: 900px;
+      overflow: auto;
+      max-height: 640px;
+  
+      h2 {
+        margin-bottom: 20px;
+      }
+  
+      table {
+        width: 890px;
+        border-collapse: collapse;
+        overflow-y: auto;
+        max-height: 640px;
+        
+  
+        th {
+          border: 1px solid #fffcfc;
+          padding: 8px;
+          text-align: center;
+          background: #354b85;
+          color: #fff;
+        
+        }
+        td {
+          background: #354b85;
+          color: #fff;
+          border: 1px solid #fcfbfb;
+          text-align: center;
+          
+
+          
+        }
+        row5 {
+          background-color: #fff;
+        }
+        
+      }
+    }
+  }
+
+
+.table:hover {
+    border:aqua;
+}
+ 
+.form-op1 {
+    width: 10px;
+}
+
+.edit{
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.delete{
+    display: inline-block;
+}
+
+
+@import '~bootstrap/scss/bootstrap';
