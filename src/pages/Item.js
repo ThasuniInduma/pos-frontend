@@ -11,41 +11,18 @@ const Item = () => {
     const[price, setPrice] = useState(null);
     const[qty, setQty] = useState(0);
     const[categoryId, setCategoryId] = useState(null);
-    const[editItem, setEditItem] = useState(null);
-    
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-
     
     useEffect(() => {
-        const fetchItems = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/items', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setItems(response.data);
-            } catch (error) {
-                if (error.response && error.response.status === 401) {
-                    // Handle unauthorized access
-                    console.error('Unauthorized access');
-                } else {
-                    // Handle other errors
-                    console.error('Error fetching categories:', error);
-                }
-            }
-        };
-    
-        fetchItems();
-    }, [token]);
+        getItems();
+        getCategories();
+    },[])
 
-    
+    const navigate = useNavigate();
 
     const getItems = async () => {
 
         try {
-            const response = await axios.get("http://localhost:8081/items");
+            const response = await axios.get("http://localhost:8080/items");
             setItems(response.data);
         } catch (error) {
             if(error.response.status === 401) {
@@ -57,7 +34,7 @@ const Item = () => {
 
     const getCategories = async () => {
         try {
-            const response = await axios.get("http://localhost:8081/categories");
+            const response = await axios.get("http://localhost:8080/categories");
             setCategories(response.data);
         }catch (error) {
             if(error.response.status === 401) {
@@ -67,7 +44,7 @@ const Item = () => {
         
     }
 
-    const handleLogout = () => {
+  const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login");
     }
@@ -165,11 +142,11 @@ const Item = () => {
                         <tbody>
                             {items && items.map((item) =>(
                             <tr key={item.id}>
-                                <Link to={`/items/${item.id}`}>
+                                
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.price}</td>
-                                    <td>{item.qty}</td></Link>
+                                    <td>{item.qty}</td>
                             </tr>
                             ))} 
                         </tbody>
