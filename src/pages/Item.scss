@@ -17,6 +17,7 @@ $secondary: #0633f9;
     margin-left: 10px;
     margin-top: 20px;
     max-width: 50px;
+    color: #fff;
   
     .form-container {
       flex: 1;
@@ -96,7 +97,9 @@ $secondary: #0633f9;
     }
   }
 
-
+.cln{
+  color: #fff;
+}
 .table:hover {
     border:aqua;
 }
