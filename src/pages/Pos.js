@@ -84,7 +84,7 @@ const Pos = () => {
                     </div>
 
                     <div className="col-md-6">
-                        <h2>Order</h2>
+                        <h2 className="ordername">Order</h2>
                         <table className="table table-stripped">
                             <thead>
                                 <tr>
@@ -121,8 +121,9 @@ const Pos = () => {
                                     </th>
                                 </tr>
                             </thead>
-                        </table>
+                        
                         <button className="btn btn-secondary" onClick={createOrder}>Complete Order</button>
+                    </table>
                     </div>
                 </div>
                 

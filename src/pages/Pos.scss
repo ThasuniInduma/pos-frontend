@@ -1,7 +1,64 @@
 
 
 .container-fluid{
+    color: #fff;
+
+
+.row{
+    margin-left: 20px;
+}
+.card5{
+    overflow: auto;
+    overflow-x: auto;
+    max-height: 620px;
+    width: 550px;
+    .table5{
+        border-collapse: collapse;
+        overflow-y:auto;
+        overflow-x: auto;
+        border: #fff;
+        max-height: fit-content;
+        width: 550px;
+        
+        th {
+            border: 1px solid #fffcfc;
+            padding: 8px;
+            text-align: center;
+            background: #354b85;
+            color: #fff;
+          
+          }
+          td {
+            background: #354b85;
+            color: #fff;
+            border: 1px solid #fcfbfb;
+            text-align: center;
+            overflow: auto;
+            overflow-x: auto;
+            .button{
+                width: 30px;;
+            }
+
+          }
+    }
     
 }
+.col-md-6{
+    .ordername{
+        margin-left: 150px;
+    }
+    .table{
+        margin-left: 150px;
+    
+    .button{
+        margin-top: 10px;
+    }
+}
+}
+
+    
+}
+
+
 
 @import '~bootstrap/scss/bootstrap';

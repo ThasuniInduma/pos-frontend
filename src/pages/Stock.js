@@ -11,7 +11,7 @@ const Stock = () => {
     
     useEffect(() => {
         getItems();
-        getStocks();
+        
     },[]);
 
     const getItems = async () => {
@@ -26,14 +26,7 @@ const Stock = () => {
         }
     }
 
-    const getStocks = async () => {
-        try {
-            const response = await axios.get(`http://localhost:8080/api/stock/byItem/${itemId}`);
-            setStocks(response.data);
-        } catch (error) {
-            console.error("Error fetching stocks:", error);
-        }
-    }
+   
 
     const handleItem = (event) => {
         setItemId(event.target.value);
@@ -121,6 +114,7 @@ const Stock = () => {
                         <tr>
                             <th className="ha2">Id</th>
                             <th className="ha2">Item Id</th>
+                            <th className="ha2">Item Name</th>
                             <th className="ha2">Qty</th>
                             
                         </tr>
@@ -130,6 +124,7 @@ const Stock = () => {
                         <tr key={stock.id} className="row7">
                             <td className="d2">{stock.id}</td>
                             <td className="d2">{stock.itemId}</td>
+                            <td className="d2">{stock.name}</td>
                             <td className="d2">{stock.qty}</td>        
                         </tr>
                         ))}
