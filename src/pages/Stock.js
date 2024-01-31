@@ -15,18 +15,21 @@ const Stock = () => {
     },[]);
 
     const getItems = async () => {
-        try{
+        try {
             const response = await axios.get("http://localhost:8080/items");
-            setItems(response.data);  
-            //console.log(response.data);
+            setItems(response.data);  // Assuming response.data is an array of items
         } catch (error) {
-            if(error.response.status === 401) {
-                return "Error fetching items:",error;
+            if (error.response && error.response.status === 401) {
+                console.error("Error fetching items:", error);
             }
         }
-    }
+    };
 
-   
+
+    const getItemName = (itemId) => {
+        const item = items.find((item) => item.id === itemId);
+        return item ? item.name : 'N/A';
+    };
 
     const handleItem = (event) => {
         setItemId(event.target.value);
@@ -124,7 +127,7 @@ const Stock = () => {
                         <tr key={stock.id} className="row7">
                             <td className="d2">{stock.id}</td>
                             <td className="d2">{stock.itemId}</td>
-                            <td className="d2">{stock.name}</td>
+                            <td className="d2">{getItemName(stock.itemId)}</td>
                             <td className="d2">{stock.qty}</td>        
                         </tr>
                         ))}
