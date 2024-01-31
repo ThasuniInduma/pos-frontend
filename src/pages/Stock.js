@@ -3,28 +3,29 @@ import './Stock.scss';
 import axios from 'axios';
 
 const Stock = () => {
+    const [stocks, setStocks] = useState([]);
+    const [items, setItems] = useState(null);
+    const [itemId, setItemId] = useState(null);
+    const [qty, setQty] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const[stocks, setStocks] = useState([]);
-    const[items, setItems] = useState(null);
-    const[itemId, setItemId] = useState(null);
-    const[qty, setQty] = useState(0);
-    
     useEffect(() => {
         getItems();
-        
-    },[]);
+    }, []);
 
     const getItems = async () => {
         try {
+            setLoading(true);
             const response = await axios.get("http://localhost:8080/items");
-            setItems(response.data);  // Assuming response.data is an array of items
+            setItems(response.data);
         } catch (error) {
-            if (error.response && error.response.status === 401) {
-                console.error("Error fetching items:", error);
-            }
+            setError("Error fetching items");
+            console.error("Error fetching items:", error);
+        } finally {
+            setLoading(false);
         }
     };
-
 
     const getItemName = (itemId) => {
         const item = items.find((item) => item.id === itemId);
@@ -41,47 +42,52 @@ const Stock = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = {
-            "itemId": itemId,
-            "qty": qty,
-            
-        }
-        if(!itemId || qty <= 0){
-            console.error("Please select an item and enter a valid quantity");
+        setError(null);
+
+        if (!itemId || qty <= 0) {
+            setError("Please select an item and enter a valid quantity");
             return;
         }
+
         try {
+            setLoading(true);
+
             const existingStock = stocks.find((stock) => stock.itemId === itemId);
-            if(existingStock){
-                const updatedStock = stocks.map((stock) => stock.itemId === itemId ? {...stock, qty: stock.qty + qty} : stock); 
+            if (existingStock) {
+                const updatedStock = stocks.map((stock) =>
+                    stock.itemId === itemId ? { ...stock, qty: stock.qty + qty } : stock
+                );
                 setStocks(updatedStock);
-            }else{
-                const response = await axios.post(`http://localhost:8080/api/stock/add`,{
+            } else {
+                const response = await axios.post(`http://localhost:8080/api/stock/add`, {
                     itemId: itemId,
                     qty: qty,
                 });
                 setStocks((newStocks) => [...newStocks, response.data]);
-            
-                const existingItem = items.find((item) => item.id === itemId);
-                if(existingItem){
-                    const updatedItems = items.map((item) => 
-                    item.id === itemId ? {...item, qty: item.qty} : item);
-                    setItems(updatedItems);
-                } 
 
-                await axios.put(`http://localhost:8080/items/${itemId}/update`,{
+                const existingItem = items.find((item) => item.id === itemId);
+                if (existingItem) {
+                    const updatedItems = items.map((item) =>
+                        item.id === itemId ? { ...item, qty: item.qty } : item
+                    );
+                    setItems(updatedItems);
+                }
+
+                await axios.put(`http://localhost:8080/items/${itemId}/update`, {
                     qty: qty,
                 });
             }
+
             setItemId(null);
             setQty(0);
-            
             console.log("Stock updated successfully");
         } catch (error) {
+            setError("Error updating stock");
             console.error("Error updating stock:", error);
+        } finally {
+            setLoading(false);
         }
-        
-    }
+    };
 
     return (
         <>
