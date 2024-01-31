@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Item.scss';
 
 const Item = () => {
@@ -11,37 +11,66 @@ const Item = () => {
     const[price, setPrice] = useState(null);
     const[qty, setQty] = useState(0);
     const[categoryId, setCategoryId] = useState(null);
+    const[editItem, setEditItem] = useState(null);
+    
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+
     
     useEffect(() => {
-        getItems();
-        getCategories();
-    },[])
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/items', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setItems(response.data);
+            } catch (error) {
+                if (error.response && error.response.status === 401) {
+                    // Handle unauthorized access
+                    console.error('Unauthorized access');
+                } else {
+                    // Handle other errors
+                    console.error('Error fetching categories:', error);
+                }
+            }
+        };
+    
+        fetchItems();
+    }, [token]);
+
+    
 
     const getItems = async () => {
-        try{
-            const response = await axios.get("http://localhost:8080/items");
-            setItems(response.data);  
+
+        try {
+            const response = await axios.get("http://localhost:8081/items");
+            setItems(response.data);
         } catch (error) {
             if(error.response.status === 401) {
-                return "error";
+                navigate("/login");
             }
         }
+        
     }
 
     const getCategories = async () => {
-
         try {
-            const response = await axios.get("http://localhost:8080/categories");
+            const response = await axios.get("http://localhost:8081/categories");
             setCategories(response.data);
-        } catch (error) {
+        }catch (error) {
             if(error.response.status === 401) {
-                return "error";
+                navigate("/login");
             }
         }
-
+        
     }
 
-  
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    }
 
     const handleName = (event) => {
         setName(event.target.value);
@@ -134,15 +163,15 @@ const Item = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>{items && items.map((item) =>(
+                            {items && items.map((item) =>(
+                            <tr key={item.id}>
                                 <Link to={`/items/${item.id}`}>
-                                    <td>{item.itemId}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.price}</td>
-                                    <td>{item.qty}</td>
-                                </Link>
-                                ))}  
+                                    <td>{item.qty}</td></Link>
                             </tr>
+                            ))} 
                         </tbody>
                     </table>
                 </div>

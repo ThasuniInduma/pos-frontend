@@ -1,0 +1,21 @@
+
+
+.checkname{
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.card-container5{
+    .card{
+        width: 1000px;
+        height:200px;
+
+        button{
+            width: 100px;
+            background: blue;
+            color: #fff;
+        }
+    }
+}
+
+@import '~bootstrap/scss/bootstrap';

@@ -11,7 +11,7 @@ export const NavbarData = [
     {
         title: "User",
         icon: <FaUserCircle />,
-        link:"#",
+        link:"/",
     },
     {
         title: "Dashboard",
@@ -40,7 +40,7 @@ export const NavbarData = [
     },{
         title: "Checkout",
         icon: <IoLogOut />,
-        link:"/login",
+        link:"/logout",
     }
 
 ];

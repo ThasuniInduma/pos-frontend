@@ -10,6 +10,8 @@ import CategoryItems from './pages/CategoryItems';
 import Pos from './pages/Pos';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import ProtectedRoutes from './utils/ProtectedRoutes';
+import Checkout from './pages/Checkout';
 
 const App = () => {
 
@@ -21,12 +23,18 @@ const App = () => {
     <BrowserRouter>
      <Navbar>
       <Routes>
-        <Route index element={<Dashboard />} />
-        <Route path="/items/" element={<Item />} />
-        <Route path="/categories" element={<Category />} />
-        <Route path="/stock" element={<Stock />} />
-        <Route path="/categoryItems" element={<CategoryItems />} />
-        <Route path="/orders" element={<Pos/>} />
+
+        <Route element={<ProtectedRoutes/>}>
+          <Route index element={<Dashboard />} />
+          <Route path="/items" element={<Item />} />
+          <Route path="/categories" element={<Category />} />
+          <Route path="/stock" element={<Stock />} />
+          <Route path="/categoryItems" element={<CategoryItems />} />
+          <Route path="/orders" element={<Pos/>} />
+        </Route>
+
+
+        <Route path="/logout" element={<Checkout/>}/>
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>}/>
       </Routes>
