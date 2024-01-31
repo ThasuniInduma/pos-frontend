@@ -10,10 +10,18 @@ const Pos = () => {
     const [tax, setTax] =useState(0);
 
     const getProducts = async () => {
-        const response = await axios.get('http://localhost:8080/items');
-
-        setProducts(response.data);
-
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get('http://localhost:8080/items', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setProducts(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            // Handle the error
+        }
     }
 
     const createOrder = async () => {
@@ -32,6 +40,8 @@ const Pos = () => {
         }
     }
 
+   
+
     useEffect(() => {
         getProducts();
     }, []);
@@ -43,7 +53,7 @@ const Pos = () => {
     return (
         <>
             <div className="container-fluid">
-                <h1>Checking Out</h1>
+                <h1>Point Of Sale</h1>
                 <div className="row">
                     <div className="col-md-6">
                         <h2>Products</h2>

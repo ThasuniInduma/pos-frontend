@@ -1,10 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Item.scss';
-import { FaEdit } from "react-icons/fa";
-import { MdDelete, MdOutlineAddHomeWork } from "react-icons/md";
-
 
 const Item = () => {
 
@@ -14,10 +11,6 @@ const Item = () => {
     const[price, setPrice] = useState(null);
     const[qty, setQty] = useState(0);
     const[categoryId, setCategoryId] = useState(null);
-    const[isEdit, setIsEdit] = useState(false);
-    const[editItemId, setEditItemId] = useState(null);
-    const[isOpen, setIsOpen] = useState(false);
-    const stockId = 'some_actual_stock_id';
     
     useEffect(() => {
         getItems();
@@ -66,20 +59,9 @@ const Item = () => {
         setCategoryId(event.target.value);
     }
 
-    const handleEdit = (itemId) => {
-        const selectedItem = items.find(item => item.id == itemId);
-        if(selectedItem){
-            setIsEdit(true);
-            setEditItemId(itemId);
-            setName(selectedItem.name);
-            setPrice(selectedItem.price);
-            setQty(selectedItem.qty);
-            setCategoryId(selectedItem.categoryId);
-        }
-    }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefalt();
         const data = {
             "name": name,
             "price": price,
@@ -87,92 +69,32 @@ const Item = () => {
             "categoryId": categoryId
         }
 
-        
-        if(isEdit){
-            try {
-                await axios.put(`http://localhost:8080/items/${editItemId}`, data);
-                const updatedItems = items.map(item => (item.id === editItemId ? {...item, ...data} : item));
-                setItems(updatedItems);
-                setIsEdit(false);
-                setEditItemId(null);
-                setName("");
-                setPrice("");
-                setQty(0);
-                setCategoryId(null);
-                handleAddStock(editItemId, qty);
-                console.log("Item updated successfully");
-            } catch (error) {
-                console.error("Error updting item:", error);
-            }
-        } else {
-            try {
-                const response = await axios.post("http://localhost:8080/items", data, {
-                    headers:{
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'
-                    }
-                });
-                setItems(prevItems => [...prevItems, response.data]);
-                setName("");
-                setPrice("");
-                setQty(0);
-                setCategoryId(null);
-                handleAddStock(response.data.id, qty);
-                console.log("Item created successfully");
-
-            } catch (error) {
-                console.error("Error creating item", error);
-            }
-        }
+        fetch("http://localhost:8080/items", {
+            method: 'POST',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(data)
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            setItems([...items, data]);
+            setName(null);
+            setPrice(null);
+            setQty(null);
+            setCategoryId(null);
+            console.log(items)
+        }).catch((error) => {
+            console.log(error);
+        })
 
     }
-
-    const handleDelete = async (itemId) => {
-        try {
-            await axios.delete(`http://localhost:8080/items/${itemId}`);
-            const updatedItems = items.filter(item => item.id !== itemId);
-            setItems(updatedItems);
-            console.log("Item deleted successfully");
-        } catch (error) {
-            console.error("Error deleting item:",error);
-        }
-    }
-
-    /*const handleAddStock = async (itemId, newQty) => {
-        try {
-          const stockDto = {
-            itemId: itemId,
-            qty: newQty,
-          };
-
-          await axios.post("http://localhost:8080:/api/stock/add", stockDto);
-
-          console.log("Stock update successfully");
-    
-          
-        } catch (error) {
-          console.error("Error adding stock:", error);
-        }
-    };*/
-    const handleAddStock = async (itemId, newQty) => {
-        try {
-            const stockDto = {
-                itemId: itemId,
-                qty: newQty,
-            };
-    
-            await axios.post("http://localhost:8080/api/stock/add", stockDto);
-    
-            console.log("Stock updated successfully");
-        } catch (error) {
-            console.error("Error adding stock:", error);
-        }
-    };
     
     return (
             <div className="item-container">
                 <div className="form-container">
-                    <h1 className="item">Item</h1>
+                    <h1>Item</h1>
                     <form className="form-item" onSubmit={handleSubmit}>
                         <div className="form-group mb-3">
                             <label className="form-label">Description</label>
@@ -188,7 +110,7 @@ const Item = () => {
                         </div>
                         <div className="form-group mb-3">
                             <label className="form-label">Category</label>
-                            <select required onChange={handleCategory} value={categoryId}>
+                            <select required onChange={handleCategory}>
                                 <option className="form-op1">Plese Select</option>
 
                                 {categories && categories.map((category) => (
@@ -198,35 +120,29 @@ const Item = () => {
                             </select>
                         </div>
                         
-                        <button type="submit" className="btn btn-secondary">{isEdit ? "Update" : "Submit"}</button>
+                        <button type="submit" className="btn btn-secondary">Submit</button>
                     </form>
                 </div>
-                <div className="card2" >
-                    <table className="table" >
+                <div className="card2">
+                    <table className="table">
                         <thead>
                             <tr>
-                                <th className="hs">Id</th>
-                                <th className="hs">Description</th>
-                                <th className="hs">Qty</th>
-                                <th className="hs">Unit Price</th>
-                                <th className="hs">Edit/Delete</th>
+                                <th className="th1">Id</th>
+                                <th className="th2">Description</th>
+                                <th className="th3">Qty</th>
+                                <th className="th4">Unit Price</th>
                             </tr>
                         </thead>
-                        <tbody className="body">
-                            {items && items.map((item) =>(
-                                <tr key={item.id} className="row5">
-                                    <td className="d">{item.id}</td>
-                                    <td className="d">{item.name}</td>
-                                    <td className="d">{item.qty}</td>
-                                    <td className="d">{item.price}</td>
-                                    <td className="d">
-                                        <div className="edit"><FaEdit onClick={() => handleEdit(item.id)}/></div>
-                                        <div className="delete"><MdDelete onClick={() => handleDelete(item.id)}/></div>
-                                    </td>
-                                </tr>
-                                
+                        <tbody>
+                            <tr>{items && items.map((item) =>(
+                                <Link to={`/items/${item.id}`}>
+                                    <td>{item.itemId}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.qty}</td>
+                                </Link>
                                 ))}  
-                            
+                            </tr>
                         </tbody>
                     </table>
                 </div>

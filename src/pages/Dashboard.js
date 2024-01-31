@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.scss';
 
 const Dashboard = () => {
 
+   
+    
     return (
         <>
+            
             <div className="Dashboard-container">
                 <h1 className="Dashboard">Dashboard</h1>
                 <div className="card-container">

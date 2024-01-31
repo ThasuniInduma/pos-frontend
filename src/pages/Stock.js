@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Stock.scss';
-import { FaEdit } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const Stock = () => {
 

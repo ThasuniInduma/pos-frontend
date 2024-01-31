@@ -1,16 +1,38 @@
 import { useEffect, useState } from 'react';
 import './Category.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
 const Category = () => {
 
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+
     
     useEffect(() => {
-        getCategories();
-    },[])
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/categories', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setCategories(response.data);
+            } catch (error) {
+                if (error.response && error.response.status === 401) {
+                    // Handle unauthorized access
+                    console.error('Unauthorized access');
+                } else {
+                    // Handle other errors
+                    console.error('Error fetching categories:', error);
+                }
+            }
+        };
+    
+        fetchCategories();
+    }, [token]);
 
     const[name, setName] = useState("");
     const[categories, setCategories] = useState([]);
@@ -19,6 +41,7 @@ const Category = () => {
     const getCategories = async () => {
         const response = await axios.get('http://localhost:8080/categories')
         setCategories(response.data);
+        navigate("/login");
     }
 
     const handleName = (event) => {
@@ -81,6 +104,8 @@ const Category = () => {
             console.error("Error deleting category:". error);
         }
     }
+
+    
 
     return (
         <>

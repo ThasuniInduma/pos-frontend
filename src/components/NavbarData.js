@@ -37,11 +37,10 @@ export const NavbarData = [
         title: "Point Of Sale",
         icon: <MdPointOfSale />,
         link:"/orders",
-    },
-    {
+    },{
         title: "Checkout",
         icon: <IoLogOut />,
-        link:"/checkout",
+        link:"/login",
     }
 
 ];
