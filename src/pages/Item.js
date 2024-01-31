@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import './Item.scss';
 import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineAddHomeWork } from "react-icons/md";
 
 
 const Item = () => {
@@ -17,7 +17,7 @@ const Item = () => {
     const[isEdit, setIsEdit] = useState(false);
     const[editItemId, setEditItemId] = useState(null);
     const[isOpen, setIsOpen] = useState(false);
-    
+    const stockId = 'some_actual_stock_id';
     
     useEffect(() => {
         getItems();
@@ -99,6 +99,7 @@ const Item = () => {
                 setPrice("");
                 setQty(0);
                 setCategoryId(null);
+                handleAddStock(editItemId, qty);
                 console.log("Item updated successfully");
             } catch (error) {
                 console.error("Error updting item:", error);
@@ -116,6 +117,7 @@ const Item = () => {
                 setPrice("");
                 setQty(0);
                 setCategoryId(null);
+                handleAddStock(response.data.id, qty);
                 console.log("Item created successfully");
 
             } catch (error) {
@@ -135,6 +137,37 @@ const Item = () => {
             console.error("Error deleting item:",error);
         }
     }
+
+    /*const handleAddStock = async (itemId, newQty) => {
+        try {
+          const stockDto = {
+            itemId: itemId,
+            qty: newQty,
+          };
+
+          await axios.post("http://localhost:8080:/api/stock/add", stockDto);
+
+          console.log("Stock update successfully");
+    
+          
+        } catch (error) {
+          console.error("Error adding stock:", error);
+        }
+    };*/
+    const handleAddStock = async (itemId, newQty) => {
+        try {
+            const stockDto = {
+                itemId: itemId,
+                qty: newQty,
+            };
+    
+            await axios.post("http://localhost:8080/api/stock/add", stockDto);
+    
+            console.log("Stock updated successfully");
+        } catch (error) {
+            console.error("Error adding stock:", error);
+        }
+    };
     
     return (
             <div className="item-container">

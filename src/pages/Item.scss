@@ -47,6 +47,7 @@ $secondary: #0633f9;
         button {
           margin-left: 120px;
           margin-top: 10px;
+          background-color: #0633f9;
         }
       }
     }
@@ -111,6 +112,10 @@ $secondary: #0633f9;
 
 .delete{
     display: inline-block;
+}
+.addstock{
+  display: inline-block;
+  margin-right: 10px;
 }
 
 

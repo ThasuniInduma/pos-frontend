@@ -36,7 +36,7 @@ export const NavbarData = [
     {
         title: "Point Of Sale",
         icon: <MdPointOfSale />,
-        link:"/sale",
+        link:"/orders",
     },
     {
         title: "Checkout",
