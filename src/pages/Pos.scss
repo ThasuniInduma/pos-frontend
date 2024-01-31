@@ -60,6 +60,10 @@
 .sss{
 .table{
     margin-left: 150px;
+    border-collapse: collapse;
+        overflow-y:auto;
+        overflow-x: auto;
+        max-height: fit-content;
 
     th{
         background: #354b85;
@@ -75,6 +79,7 @@
             text-align: center;
             overflow: auto;
             overflow-x: auto;
+            
     }
     }
 }
