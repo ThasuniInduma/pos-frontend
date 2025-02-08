@@ -19,12 +19,12 @@ Welcome to the **Point of Sale (POS) System** frontend, designed with **React.js
 
 <table>
   <tr>
-    <td><img src="images/img01.png" alt="Register Page" width="700" height="300"/></td>
-    <td><img src="images/img02.png" alt="Home Page" width="700" height="300"/></td>
+    <td><img src="images/img06.png" alt="Register Page" width="700" height="300"/></td>
+    <td><img src="images/img08.png" alt="Home Page" width="700" height="300"/></td>
   </tr>
   <tr>
-    <td><img src="images/img03.png" alt="Manage Item Page" width="700" height="300"/></td>
-    <td><img src="images/img05.png" alt="Order Page" width="700" height="300"/></td>
+    <td><img src="images/img09.png" alt="Manage Item Page" width="700" height="300"/></td>
+    <td><img src="images/img10.png" alt="Order Page" width="700" height="300"/></td>
   </tr>
 </table>  
 
