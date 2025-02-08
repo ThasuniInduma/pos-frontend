@@ -1,6 +1,5 @@
 .Dashboard {
     color: #fff;
-    margin-top: 10px;
     margin-left: 10px;
 }
 
@@ -13,24 +12,37 @@
 
 .card-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     flex: 1;
-    background-color: #1e3674;;
+    background-color: #be92df;;
+    gap: 20px;
+
+    
 }
 
 .card {
-    background-color:#354b85;
-    border: 1px solid #354b85;
-    color: #354b85;
+    background-color:#260236;
+    border: 1px solid #260236;
+    color: #260236;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 380px;
-    min-width: 200px;
-    margin: 0 10px;
-    height: 50px;
-    margin-bottom: 500px;
+    box-shadow: 0 2px 4px rgba(84, 147, 199, 0.1);
+    width: 450px;
+    height: 150px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
+@media (max-width: 768px) {
+    .card {
+        width: calc(100%); 
+    }
+}
+
+
 
 
 

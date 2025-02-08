@@ -7,12 +7,14 @@
 }
 .card-container5{
     .card{
-        width: 1000px;
+        margin-left: 100px;
+        margin-right: 100px;
+        width: auto;
         height:200px;
 
         button{
             width: 100px;
-            background: blue;
+            background: purple;
             color: #fff;
         }
     }

@@ -5,7 +5,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     const cardStyle = {
-        backgroundColor: '#354b85', 
+        backgroundColor: '#52056d', 
         color: 'white', 
     };
 

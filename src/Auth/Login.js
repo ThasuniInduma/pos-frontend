@@ -60,7 +60,7 @@ const Login = () => {
                 
                 
             </form>
-            <button className="regbtn" type="btn btn-primary"><Link to="/register" className="reg" >Register</Link></button>
+            <button className="regbtn" type="btn btn-primary"><Link to="/register" className="reg" >Click Here to Register</Link></button>
         </div>
     )
     

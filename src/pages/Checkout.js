@@ -11,7 +11,7 @@ const Checkout = () => {
     }
 
     const handleCardStyle = {
-        backgroundColor: '#354b85', 
+        backgroundColor: '#260236', 
         color: 'white',
     };
 
