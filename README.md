@@ -31,8 +31,18 @@ Welcome to the **Point of Sale (POS) System** frontend, designed with **React.js
 📌 *Screenshots are available in the `images` folder.*
 
 ## 🚀 Installation & Usage
+  **Clone the repository :**  
+   ```bash
+   git clone https://github.com/ThasuniInduma/pos-frontend.git
+   cd pos-frontend
 
-### **Clone the Repository**
-```sh
-git clone https://github.com/ThasuniInduma/pos-frontend.git
-cd pos-frontend
+2. **Install dependencies :**  
+   ```bash
+   npm install
+
+3. **Start the development server :**  
+   ```bash
+   npm run dev
+
+
+### 🌟 Thank You for Exploring Our POS System Frontend! 🚀
