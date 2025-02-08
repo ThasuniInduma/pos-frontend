@@ -48,4 +48,4 @@ npm install
 npm run dev
  ```
 
-### 🌟 Thank You for Exploring Our POS System Frontend! 🚀
+### 🌟 Thank You for Exploring POS System Frontend! 🚀
